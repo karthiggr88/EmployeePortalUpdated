@@ -5,84 +5,87 @@
 
 @{
     ViewBag.Title = "Employee";
-    <label>ViewBag.ResponseMessage</label>
-}
+    var message = ViewData["Mesage"];
+    var errormessage = ViewData["errormessage"];
+    var name = "";
+    if (TempData.ContainsKey("Mesage"))
+    {
+        name = TempData["Mesage"] as string;
+    }
 
+}
+<div>
+    <label style="color:green">@name</label>
+    <label style="color:red">@errormessage</label>
+</div>
 <h2 style="align-content:center">Employee Search List Screen</h2>
 
 @using (Html.BeginForm("Employee", "Employees", FormMethod.Get))
 {
-    @*<div>
-            <b>search by</b> @Html.RadioButton("searchby", "Name") <text> Name </text><br />
-            @Html.RadioButton("searchby", "Gender") <text>Gender</text>
-            @Html.TextBox("searchvalue") <input type="submit" value="search" />
+ 
+    <div>
+        <table>
+            <tr>
+                <td>
+                    <b>Employee Id</b>
+                </td>
+                <td>
+                    @Html.TextBox("Empid", "")
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                    <b><text>Gender</text></b>
+                </td>
+                <td>
+                    @Html.TextBox("gender", "")
+                </td>
+            </tr>
+            <tr>
+            <tr>
+                <td>
+                    <b>Name</b>
+                </td>
+                <td>
+                    @Html.TextBox("Name", "")
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="submit" value="search" />
+                </td>
+            </tr>
+        </table>
 
-        </div>*@
-<div>
-    
-    <b>search by</b> @Html.TextBox("Name", "") <text> Name </text><br />
-    @Html.TextBox("gender", "") <text>Gender</text>
-    <input type="submit" value="search" />
-
-</div>
-    <!--<table>
-        <tr>
-            <td>
-                <b>search by</b> @Html.RadioButton("searchby", "Na me")
-            </td>
-
-        </tr>
-        <tr>
-            <th>Emp No</th>
-            <td>
-                @Html.TextBox("searchby")
 
 
-            </td>
-        </tr>
-        <tr>
-            <th>Emp Name</th>
 
-            <td>
-                @Html.TextBox("searchby")
-            </td>
-        </tr>
-        <tr>
-            <th>Gender</th>
-            <td>
-                @Html.TextBox("searchby")
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="submit" value="Serach" class="btn btn-default" />
-            </td>-->
+    </div>
 
-    @*<td><input type="button" value="searchemployee" onclick="@("window.location.href='" + @Url.Action("SearchEmployee", "Employees") + "'");" /></td>*@
-    <!--</tr>
-
-    </table>-->
     Html.EndForm();
 }
 <table>
     <tr>
-        <td><input type="button" value="Create Employee" onclick="@("window.location.href='" + @Url.Action("Create", "Employees") + "'");" /></td>
+        <td>
+            Employee List (<label style="color:red"> @Model.Count() </label>items)
+        </td>
     </tr>
     <tr>
-        <td><input type="button" value="CSV Download" onclick="@("window.location.href='" + @Url.Action("ExportCSV", "Employees") + "'");" /></td>
+        <td><input type="button" value="Add New Employee" onclick="@("window.location.href='" + @Url.Action("Create", "Employees") + "'");" /></td>
+        <td>
+            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+            <input type="button" value="CSV Download" onclick="@("window.location.href='" + @Url.Action("ExportCSV", "Employees") + "'");" />
+        </td>
     </tr>
+
 </table>
 
-
-
-
-
-@if (Model.Count() <= 0)
-{
-    <div>
-        <label style="color:red">No Records Found</label>
-    </div>
-}
 <table border="1">
     @if (Model.Count() > 0)
     {
@@ -109,16 +112,17 @@
 
             <td>
                 @Html.DisplayFor(modelItem => item.first_name),
-                @Html.DisplayFor(modelItem => item.last_name)-
-                @Html.DisplayFor(modelItem => item.emp_id)
+                @Html.DisplayFor(modelItem => item.last_name) <br />
+                <text>#</text>@Html.DisplayFor(modelItem => item.emp_id)
             </td>
 
             <td>
-                @Html.DisplayFor(modelItem => item.mobile_num),
+                @Html.DisplayFor(modelItem => item.mobile_num) <br />
                 @Html.DisplayFor(modelItem => item.email_id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.emp_level)/@Html.DisplayFor(modelItem => item.post_name)
+                @Html.DisplayFor(modelItem => item.emp_level)/ <br />
+                @Html.DisplayFor(modelItem => item.post_name)
             </td>
             <td>
                 @Html.ActionLink("Employments", "Details", new { id = item.emp_id }) |

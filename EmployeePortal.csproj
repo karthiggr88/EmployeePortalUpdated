@@ -157,11 +157,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Employees\Employee.cshtml" />
     <Content Include="Views\Employees\Create.cshtml" />
-    <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Employees\ExportCSV.cshtml" />
     <Content Include="Views\Employees\SearchEmployee.cshtml" />
     <Content Include="Views\Employees\DeleteConfirmed.cshtml" />
+    <Content Include="Views\Employees\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

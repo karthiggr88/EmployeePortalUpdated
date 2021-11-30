@@ -13,20 +13,79 @@
             changeYear: true
 
         });
+        $("#doj").datepicker({
+
+            dateFormat: "dd-mm-yy",
+            changeMonth: true,
+            changeYear: true
+
+        });
     });
+
 </script>
+@{
+    List<SelectListItem> Genderlist = new List<SelectListItem>();
+    Genderlist.Add(new SelectListItem
+    {
+        Text = "Male",
+        Value = "M"
+    });
+    Genderlist.Add(new SelectListItem
+    {
+        Text = "Female",
+        Value = "F"
+    });
+    Genderlist.Add(new SelectListItem
+    {
+        Text = "ND",
+        Value = "ND"
+    });
+    List<SelectListItem> BloodGrouplist = new List<SelectListItem>();
+    BloodGrouplist.Add(new SelectListItem
+    {
+        Text = "O+ve",
+        Value = "O + ve"
+    });
+    BloodGrouplist.Add(new SelectListItem
+    {
+        Text = "O-ve",
+        Value = "O-ve"
+    });
+    BloodGrouplist.Add(new SelectListItem
+    {
+        Text = "A+ve",
+        Value = "A+ve"
+    });
+    BloodGrouplist.Add(new SelectListItem
+    {
+        Text = "B+ve",
+        Value = "B+ve"
+    });
+    BloodGrouplist.Add(new SelectListItem
+    {
+        Text = "AB+ve",
+        Value = "AB+ve"
+    });
+
+}
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <h4>Employee</h4>
     <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.ValidationSummary(true, "Form has invalid input data, please correct the errors and submit again!!!", new { @class = "text-danger" })
+    if (!Html.ViewData.ModelState.IsValid)
+    {
+        // show error
+    }
     <table>
         <tr>
-            <td> FirstName</td>
+            <td>
+                FirstName (<label style="color:red">*</label>)
+            </td>
             <td>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.first_name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.first_name, new { htmlAttributes = new { @class = "form-control" } }) <br />
                     @Html.ValidationMessageFor(model => model.first_name, "", new { @class = "text-danger" })
                 </div>
 
@@ -35,20 +94,24 @@
                 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                LastName
+                LastName (<label style="color:red">*</label>)
             </td>
             <td>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.last_name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.last_name, new { htmlAttributes = new { @class = "form-control" } }) <br />
                     @Html.ValidationMessageFor(model => model.last_name, "", new { @class = "text-danger" })
                 </div>
             </td>
         </tr>
         <tr>
-            <td> Gender</td>
+            <td>
+                Gender (<label style="color:red">*</label>)
+            </td>
             <td>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.gender, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownListFor(model => model.gender, Genderlist, "-- Select Gender --")
+                    @*@Html.EditorFor(model => model.gender, new { htmlAttributes = new { @class = "form-control" } }) <br />*@
+                    <br />
                     @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
                 </div>
 
@@ -57,20 +120,22 @@
                 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                DOB
+                DOB (<label style="color:red">*</label>)
             </td>
             <td>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.dob, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.dob, new { htmlAttributes = new { @class = "form-control" } }) <br />
                     @Html.ValidationMessageFor(model => model.dob, "", new { @class = "text-danger" })
                 </div>
             </td>
         </tr>
         <tr>
-            <td>  PANNumber</td>
+            <td>
+                PANNumber
+            </td>
             <td>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.pan_num, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.pan_num, new { htmlAttributes = new { @class = "form-control" } }) <br />
                     @Html.ValidationMessageFor(model => model.pan_num, "", new { @class = "text-danger" })
                 </div>
 
@@ -83,16 +148,18 @@
             </td>
             <td>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.aadhaar_num, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.aadhaar_num, new { htmlAttributes = new { @class = "form-control" } }) <br />
                     @Html.ValidationMessageFor(model => model.aadhaar_num, "", new { @class = "text-danger" })
                 </div>
             </td>
         </tr>
         <tr>
-            <td> MobileNumber</td>
+            <td>
+                MobileNumber(<label style="color:red">*</label>)
+            </td>
             <td>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.mobile_num, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.mobile_num, new { htmlAttributes = new { @class = "form-control" } }) <br />
                     @Html.ValidationMessageFor(model => model.mobile_num, "", new { @class = "text-danger" })
                 </div>
 
@@ -100,11 +167,11 @@
         </tr>
         <tr>
             <td>
-                EmailAddress
+                EmailAddress (<label style="color:red">*</label>)
             </td>
             <td>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.email_id, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.email_id, new { htmlAttributes = new { @class = "form-control" } }) <br />
                     @Html.ValidationMessageFor(model => model.email_id, "", new { @class = "text-danger" })
                 </div>
             </td>
@@ -112,11 +179,11 @@
                 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                OfficialEmail
+                OfficialEmail (<label style="color:red">*</label>)
             </td>
             <td>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.office_mail, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.office_mail, new { htmlAttributes = new { @class = "form-control" } }) <br />
                     @Html.ValidationMessageFor(model => model.office_mail, "", new { @class = "text-danger" })
                 </div>
             </td>
@@ -127,7 +194,7 @@
             </td>
             <td>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.permanent_address, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.permanent_address, new { htmlAttributes = new { @class = "form-control" } }) <br />
                     @Html.ValidationMessageFor(model => model.permanent_address, "", new { @class = "text-danger" })
                 </div>
             </td>
@@ -139,7 +206,7 @@
             </td>
             <td>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.present_address, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.present_address, new { htmlAttributes = new { @class = "form-control" } }) <br />
                     @Html.ValidationMessageFor(model => model.present_address, "", new { @class = "text-danger" })
                 </div>
             </td>
@@ -150,7 +217,8 @@
             </td>
             <td>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.blood_group, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownListFor(model => model.blood_group, BloodGrouplist, "-- Select Group --")
+                    <br />
                     @Html.ValidationMessageFor(model => model.blood_group, "", new { @class = "text-danger" })
                 </div>
             </td>
@@ -158,32 +226,34 @@
                 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                DOJ
+                DOJ (<label style="color:red">*</label>)
             </td>
             <td>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.doj, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.doj, new { htmlAttributes = new { @class = "form-control" } }) <br />
                     @Html.ValidationMessageFor(model => model.doj, "", new { @class = "text-danger" })
                 </div>
             </td>
         </tr>
         <tr>
             <td>
-                Employee Level
+                Employee Level (<label style="color:red">*</label>)
             </td>
             <td>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.emp_level, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.emp_level, new { htmlAttributes = new { @class = "form-control" } }) <br />
                     @Html.ValidationMessageFor(model => model.emp_level, "", new { @class = "text-danger" })
                 </div>
             </td>
-            
+
         </tr>
         <tr>
-            <td> Designation</td>
+            <td>
+                Designation (<label style="color:red">*</label>)
+            </td>
             <td>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.post_name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.post_name, new { htmlAttributes = new { @class = "form-control" } }) <br />
                     @Html.ValidationMessageFor(model => model.post_name, "", new { @class = "text-danger" })
                 </div>
             </td>
@@ -191,11 +261,11 @@
                 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-                Basic Pay
+                Basic Pay (<label style="color:red">*</label>)
             </td>
             <td>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.basic_pay, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.basic_pay, new { htmlAttributes = new { @class = "form-control" } }) <br />
                     @Html.ValidationMessageFor(model => model.basic_pay, "", new { @class = "text-danger" })
                 </div>
             </td>
@@ -203,11 +273,11 @@
         </tr>
         <tr>
             <td>
-                House Allowance
+                House Allowance (<label style="color:red">*</label>)
             </td>
             <td>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.house_allowance, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.house_allowance, new { htmlAttributes = new { @class = "form-control" } }) <br />
                     @Html.ValidationMessageFor(model => model.house_allowance, "", new { @class = "text-danger" })
                 </div>
             </td>
@@ -220,6 +290,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
+                @Html.ActionLink("Cancel", "Employee")
             </div>
         </div>
     </div>
@@ -227,6 +298,6 @@
 <br />
 <br />
 <br /><div>
-    @Html.ActionLink("Back to List", "Employee")
+
 </div>
- 
+

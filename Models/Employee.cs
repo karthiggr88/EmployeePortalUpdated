@@ -24,12 +24,11 @@ namespace EmployeePortal.Models
         public string last_name { get; set; }
         [Required(ErrorMessage = "Please input valid gender!")]
         public string gender { get; set; }
-        [Required]
-        [DataType(DataType.DateTime)]       
-        public System.DateTime dob { get; set; }
-        [Required]
-        public string pan_num { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter Date of brith")]
+        [DataType(DataType.DateTime)]
+        
+        public System.DateTime dob { get; set; }         
+        public string pan_num { get; set; }        
         public string aadhaar_num { get; set; }
         [Required(ErrorMessage = "Please enter monile No")]         
         [DataType(DataType.PhoneNumber)]
@@ -42,11 +41,11 @@ namespace EmployeePortal.Models
         [Required(ErrorMessage = "Please enter valid Email ID")]
         [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Email is not valid.")]
         public string office_mail { get; set; }
-        [MaxLength(200, ErrorMessage = "The Permanent Address cannot be more than 200 characters")]         
+            
         public string permanent_address { get; set; }
-        [MaxLength(200, ErrorMessage = "The Present Address cannot be more than 200 characters")]
+         
         public string present_address { get; set; }
-        [Required(ErrorMessage = "Please blood group!")]
+         
         public string blood_group { get; set; }        
         public string profile_pict { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}")]
@@ -56,15 +55,12 @@ namespace EmployeePortal.Models
         public int emp_level { get; set; }
         [Required]
         public string post_name { get; set; }
-        [Required(ErrorMessage= "Please input numeric only!")]
-        [DataType(DataType.Currency)]
-        [Range(3, 8,ErrorMessage = "Please input  between 3 to 8  characters!!")]
+        
         public int basic_pay { get; set; }
-        [Required(ErrorMessage = "Please input numeric only!")]
-        [DataType(DataType.Currency)]
-        [Range(3, 5, ErrorMessage= "Please input  between 3 to 5  characters!!")]
+       
         public int house_allowance { get; set; }
     
         public virtual Employment_history Employment_history { get; set; }
     }
+
 }
