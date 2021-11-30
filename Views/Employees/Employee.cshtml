@@ -1,0 +1,133 @@
+﻿
+@model IEnumerable<EmployeePortal.Models.Employee>
+
+
+
+@{
+    ViewBag.Title = "Employee";
+    <label>ViewBag.ResponseMessage</label>
+}
+
+<h2 style="align-content:center">Employee Search List Screen</h2>
+
+@using (Html.BeginForm("Employee", "Employees", FormMethod.Get))
+{
+    @*<div>
+            <b>search by</b> @Html.RadioButton("searchby", "Name") <text> Name </text><br />
+            @Html.RadioButton("searchby", "Gender") <text>Gender</text>
+            @Html.TextBox("searchvalue") <input type="submit" value="search" />
+
+        </div>*@
+<div>
+    
+    <b>search by</b> @Html.TextBox("Name", "") <text> Name </text><br />
+    @Html.TextBox("gender", "") <text>Gender</text>
+    <input type="submit" value="search" />
+
+</div>
+    <!--<table>
+        <tr>
+            <td>
+                <b>search by</b> @Html.RadioButton("searchby", "Na me")
+            </td>
+
+        </tr>
+        <tr>
+            <th>Emp No</th>
+            <td>
+                @Html.TextBox("searchby")
+
+
+            </td>
+        </tr>
+        <tr>
+            <th>Emp Name</th>
+
+            <td>
+                @Html.TextBox("searchby")
+            </td>
+        </tr>
+        <tr>
+            <th>Gender</th>
+            <td>
+                @Html.TextBox("searchby")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Serach" class="btn btn-default" />
+            </td>-->
+
+    @*<td><input type="button" value="searchemployee" onclick="@("window.location.href='" + @Url.Action("SearchEmployee", "Employees") + "'");" /></td>*@
+    <!--</tr>
+
+    </table>-->
+    Html.EndForm();
+}
+<table>
+    <tr>
+        <td><input type="button" value="Create Employee" onclick="@("window.location.href='" + @Url.Action("Create", "Employees") + "'");" /></td>
+    </tr>
+    <tr>
+        <td><input type="button" value="CSV Download" onclick="@("window.location.href='" + @Url.Action("ExportCSV", "Employees") + "'");" /></td>
+    </tr>
+</table>
+
+
+
+
+
+@if (Model.Count() <= 0)
+{
+    <div>
+        <label style="color:red">No Records Found</label>
+    </div>
+}
+<table border="1">
+    @if (Model.Count() > 0)
+    {
+        <tr>
+            <th>
+                <label>Name</label>
+            </th>
+            <th>
+                <label>Contact</label>
+            </th>
+            <th>
+                <label>Level/Post</label>
+            </th>
+            <th>
+                <label>Action</label>
+            </th>
+
+        </tr>
+    }
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.first_name),
+                @Html.DisplayFor(modelItem => item.last_name)-
+                @Html.DisplayFor(modelItem => item.emp_id)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.mobile_num),
+                @Html.DisplayFor(modelItem => item.email_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.emp_level)/@Html.DisplayFor(modelItem => item.post_name)
+            </td>
+            <td>
+                @Html.ActionLink("Employments", "Details", new { id = item.emp_id }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.emp_id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.emp_id })
+            </td>
+        </tr>
+
+    }
+
+</table>
+

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<EmployeePortal.Models.Employment_history>
+
+<h4>Employment_history</h4>
+@if (Model.Count() <= 0)
+{
+    <div>
+        <label style="color:red">No Records Found</label>
+    </div>
+}
+<hr />
+@if (Model.Count() > 0)
+{
+    <table border="1">
+
+        <tr>
+            <th>Orgnization</th>
+            <th>period</th>
+            <th>Location</th>
+            <th>Post</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.organization_name)
+                </td>
+                <td> @Html.DisplayFor(modelItem => item.from_date) - @Html.DisplayFor(modelItem => item.until_date) </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.location)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.post)
+
+                </td>
+            </tr>
+        }
+    </table>
+
+}
+    <p>
+        @Html.ActionLink("Back to List", "Employee")
+    </p>

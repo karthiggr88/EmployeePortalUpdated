@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EmployeeDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="emp_id" />
+          </Key>
+          <Property Name="emp_id" Type="int" Nullable="false" />
+          <Property Name="first_name" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="last_name" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="gender" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="dob" Type="datetime" Nullable="false" />
+          <Property Name="pan_num" Type="char" MaxLength="15" />
+          <Property Name="aadhaar_num" Type="char" MaxLength="15" />
+          <Property Name="mobile_num" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="email_id" Type="char" MaxLength="150" Nullable="false" />
+          <Property Name="office_mail" Type="char" MaxLength="150" Nullable="false" />
+          <Property Name="permanent_address" Type="text" />
+          <Property Name="present_address" Type="text" />
+          <Property Name="blood_group" Type="char" MaxLength="5" />
+          <Property Name="profile_pict" Type="char" MaxLength="200" />
+          <Property Name="doj" Type="date" Nullable="false" />
+          <Property Name="emp_level" Type="int" Nullable="false" />
+          <Property Name="post_name" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="basic_pay" Type="int" Nullable="false" />
+          <Property Name="house_allowance" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employment_history">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="emp_id" Type="int" Nullable="false" />
+          <Property Name="organization_name" Type="char" MaxLength="40" Nullable="false" />
+          <Property Name="from_date" Type="date" Nullable="false" />
+          <Property Name="until_date" Type="date" Nullable="false" />
+          <Property Name="location" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="country" Type="text" />
+          <Property Name="post" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="skill_used" Type="text" />
+        </EntityType>
+        <Association Name="FK_Employment_history_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Employment_history" Type="Self.Employment_history" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="Employment_history">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EmployeeDBModelStoreContainer">
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employment_history" EntityType="Self.Employment_history" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Employment_history_Employees" Association="Self.FK_Employment_history_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Employment_history" EntitySet="Employment_history" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EmployeeDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="emp_id" />
+          </Key>
+          <Property Name="emp_id" Type="Int32" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="gender" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="dob" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="pan_num" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="aadhaar_num" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="mobile_num" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="email_id" Type="String" MaxLength="150" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="office_mail" Type="String" MaxLength="150" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="permanent_address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="present_address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="blood_group" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="profile_pict" Type="String" MaxLength="200" FixedLength="true" Unicode="false" />
+          <Property Name="doj" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="emp_level" Type="Int32" Nullable="false" />
+          <Property Name="post_name" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="basic_pay" Type="Int32" Nullable="false" />
+          <Property Name="house_allowance" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employment_history" Relationship="Self.FK_Employment_history_Employees" FromRole="Employees" ToRole="Employment_history" />
+        </EntityType>
+        <EntityType Name="Employment_history">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="emp_id" Type="Int32" Nullable="false" />
+          <Property Name="organization_name" Type="String" MaxLength="40" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="from_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="until_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="location" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="country" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="post" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="skill_used" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employment_history_Employees" FromRole="Employment_history" ToRole="Employees" />
+        </EntityType>
+        <Association Name="FK_Employment_history_Employees">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Employment_history" Type="Self.Employment_history" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="Employment_history">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EmployeeDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Employment_history" EntityType="Self.Employment_history" />
+          <AssociationSet Name="FK_Employment_history_Employees" Association="Self.FK_Employment_history_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Employment_history" EntitySet="Employment_history" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EmployeeDBModelStoreContainer" CdmEntityContainer="EmployeeDBEntities">
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="EmployeeDBModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="pan_num" ColumnName="pan_num" />
+                <ScalarProperty Name="aadhaar_num" ColumnName="aadhaar_num" />
+                <ScalarProperty Name="mobile_num" ColumnName="mobile_num" />
+                <ScalarProperty Name="email_id" ColumnName="email_id" />
+                <ScalarProperty Name="office_mail" ColumnName="office_mail" />
+                <ScalarProperty Name="permanent_address" ColumnName="permanent_address" />
+                <ScalarProperty Name="present_address" ColumnName="present_address" />
+                <ScalarProperty Name="blood_group" ColumnName="blood_group" />
+                <ScalarProperty Name="profile_pict" ColumnName="profile_pict" />
+                <ScalarProperty Name="doj" ColumnName="doj" />
+                <ScalarProperty Name="emp_level" ColumnName="emp_level" />
+                <ScalarProperty Name="post_name" ColumnName="post_name" />
+                <ScalarProperty Name="basic_pay" ColumnName="basic_pay" />
+                <ScalarProperty Name="house_allowance" ColumnName="house_allowance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employment_history">
+            <EntityTypeMapping TypeName="EmployeeDBModel.Employment_history">
+              <MappingFragment StoreEntitySet="Employment_history">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="organization_name" ColumnName="organization_name" />
+                <ScalarProperty Name="from_date" ColumnName="from_date" />
+                <ScalarProperty Name="until_date" ColumnName="until_date" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="post" ColumnName="post" />
+                <ScalarProperty Name="skill_used" ColumnName="skill_used" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

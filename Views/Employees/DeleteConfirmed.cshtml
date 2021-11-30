@@ -1,0 +1,170 @@
+﻿@model EmployeePortal.Models.Employee
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Employee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.first_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.first_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.last_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.last_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dob)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dob)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pan_num)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pan_num)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.aadhaar_num)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.aadhaar_num)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mobile_num)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mobile_num)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.office_mail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.office_mail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.permanent_address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.permanent_address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.present_address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.present_address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.blood_group)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.blood_group)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.profile_pict)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.profile_pict)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.doj)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.doj)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.emp_level)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emp_level)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.post_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.post_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.basic_pay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.basic_pay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.house_allowance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.house_allowance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employment_history.organization_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employment_history.organization_name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
